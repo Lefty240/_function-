@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function sumSalaries(department) {
+            if (Array.isArray(department)) {
+                return department.reduce((prev, current) => prev + current.salary, 0);
+            } else {
+                let sum = 0;
+                for (let subdep of Object.values(department)) {
+                    sum += sumSalaries(subdep);
+                }
+                return sum;
+            }
+        }
+        let company = {
+            sales: [{
+                name: 'john',
+                salary: 1000
+            }, {
+                name: 'alice',
+                salary: 1600
+            }],
+
+            development: {
+                sites: [{
+                    name: 'jock',
+                    salary: 2000
+                }, {
+                    name: 'witcher',
+                    salary: 1800
+                }],
+                internals: [{
+                    name: 'jkks',
+                    salary: 1300
+                }]
+            }
+        };
+        console.log(sumSalaries(company))
+    </script>
+</body>
+
+</html>
